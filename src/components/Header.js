@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart } from '../store/slices/cartSlice';
+import logo from '../redux.png'
 
 
 const Header = () => {
@@ -23,7 +24,7 @@ const Header = () => {
             <header id="header">
                 <div className="container">
                     <div className="navbar">
-                        <h4>Redux Shopping Cart</h4>
+                        <h4><img src={logo} alt='logo-la-maison-jungle' className='lmj-logo' />Redux Shopping Cart</h4>
                         <div className="nav_menu">
                             <div
                                 title="Cart"

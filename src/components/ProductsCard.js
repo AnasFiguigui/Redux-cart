@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../store/slices/cartSlice';
 
 
+
 const ProductsCard = (props) => {
 
     const { img, rating, title, price } = props;
@@ -23,7 +24,7 @@ const ProductsCard = (props) => {
 
         setTimeout(() => {
             setIsAdded(false);
-        }, 3000);
+        }, 350);
     };
 
 
@@ -35,7 +36,7 @@ const ProductsCard = (props) => {
                 </figure>
                 <strong className="rating">{rating}</strong>
                 <h4 className="title">{title}</h4>
-                <h3 className="price">₹ {price.toLocaleString()}</h3>
+                <h3 className="price">{price.toLocaleString()}DH </h3>
                 <button
                     type="button"
                     className={`btn ${isAdded ? 'added' : ''}`}

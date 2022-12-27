@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart, removeItem, incrementItem, decrementItem } from '../store/slices/cartSlice';
 
@@ -11,9 +11,9 @@ const Cart = () => {
     const dispatch = useDispatch();
 
 
-    const handleCloseCart = (close) => {
+    const handleCloseCart = useCallback((close) => {
         dispatch(toggleCart(close));
-    };
+    });
 
 
     const handleRemove = (itemId) => {
@@ -43,21 +43,20 @@ const Cart = () => {
     }, [isCartOpen]);
 
 
-    // closing the Cart on clicking outside of it
 
-    // useEffect(() => {
-    //     const outsideClose = (e) => {
-    //         if (e.target.id === 'cart') {
-    //             handleCloseCart(false);
-    //         }
-    //     };
+    useEffect(() => {
+        const outsideClose = (e) => {
+            if (e.target.id === 'cart') {
+                handleCloseCart(false);
+            }
+        };
 
-    //     window.addEventListener('click', outsideClose);
+        window.addEventListener('click', outsideClose);
 
-    //     return () => {
-    //         window.removeEventListener('click', outsideClose);
-    //     };
-    // }, [handleCloseCart]);
+        return () => {
+            window.removeEventListener('click', outsideClose);
+        };
+    }, [handleCloseCart]);
 
 
     const cartQuantity = cartItems.length;
@@ -99,13 +98,15 @@ const Cart = () => {
 
                                                     <div className="cart_items_info">
                                                         <h4>{title}</h4>
-                                                        <h3 className="price">₹ {itemTotal.toLocaleString()}</h3>
+                                                        <h3 className="price"> {itemTotal.toLocaleString()}DH</h3>
                                                     </div>
 
                                                     <div className="cart_items_quantity">
-                                                        <span onClick={() => handleDecrement(id)}>&#8722;</span>
-                                                        <b>{quantity}</b>
                                                         <span onClick={() => handleIncrement(id)}>&#43;</span>
+                                                        <b>{quantity}</b>
+                                                        <span onClick={() => handleDecrement(id)}>&#8722;</span>
+
+
                                                     </div>
 
                                                     <div
@@ -125,7 +126,7 @@ const Cart = () => {
                             <div className="cart_foot">
                                 <h3>
                                     <small>Total:</small>
-                                    <b>₹ {cartTotal.toLocaleString()}</b>
+                                    <b> {cartTotal.toLocaleString()}DH</b>
                                 </h3>
 
                                 <button
