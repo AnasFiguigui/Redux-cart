@@ -1,7 +1,7 @@
 import React, { useEffect,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleCart, removeItem, incrementItem, decrementItem } from '../store/slices/cartSlice';
-
+import { toggleCart, removeItem, incrementItem, decrementItem,} from '../store/slices/cartSlice';
+import { Link} from 'react-router-dom'
 
 const Cart = () => {
 
@@ -28,7 +28,9 @@ const Cart = () => {
     const handleDecrement = (itemId) => {
         dispatch(decrementItem(itemId));
     };
-
+    const handleOpenCart = (open) => {
+        dispatch(toggleCart(open));
+    };
 
     // disable the body-scroll when the Cart is open
     useEffect(() => {
@@ -129,13 +131,16 @@ const Cart = () => {
                                     <b> {cartTotal.toLocaleString()}DH</b>
                                 </h3>
 
+                                <Link to="/Checkout">
                                 <button
                                     type="button"
                                     className="checkout_btn"
                                     disabled={cartQuantity === 0}
+                                    onClick={() => handleOpenCart(false)}
                                 >
                                     Checkout
                                 </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

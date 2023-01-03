@@ -1,18 +1,17 @@
 import React from 'react';
-import productsData from '../data/productsData';
-import ProductsCard from '../components/ProductsCard';
-import Cover from './Cover'
+import productsData from '../../data/productsData';
+import ProductsCard from '../ProductsCard';
 
-const Home = () => {
+const Souris = () => {
     return (
         <>
-            <Cover/>
             <section id="home">
                 <div className="container">
                     <div className="home_content">
                         {
                             productsData.map((item) => (
-                                <ProductsCard key={item.id} {...item} />
+                                item.type === "Souris"? 
+                                <ProductsCard key={item.id} {...item} />:null
                             ))
                         }
                     </div>
@@ -22,4 +21,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Souris;
